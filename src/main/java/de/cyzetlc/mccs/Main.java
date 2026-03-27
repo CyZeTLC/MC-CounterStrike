@@ -1,8 +1,10 @@
 package de.cyzetlc.mccs;
 
+import de.cyzetlc.mccs.utils.motd.MotdHandler;
 import net.minestom.server.Auth;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.coordinate.Pos;
+import net.minestom.server.entity.GameMode;
 import net.minestom.server.entity.Player;
 import net.minestom.server.event.GlobalEventHandler;
 import net.minestom.server.event.player.AsyncPlayerConfigurationEvent;
@@ -20,7 +22,11 @@ public class Main {
         InstanceManager instanceManager = MinecraftServer.getInstanceManager();
         InstanceContainer instanceContainer = instanceManager.createInstanceContainer();
 
-        instanceContainer.setGenerator(unit -> unit.modifier().fillHeight(0, 40, Block.GRASS_BLOCK));
+        instanceContainer.setGenerator(unit -> {
+            unit.modifier().fillHeight(40,41, Block.GRASS_BLOCK);
+            unit.modifier().fillHeight(1,40, Block.DIRT);
+            unit.modifier().fillHeight(0,1, Block.BEDROCK);
+        });
 
         instanceContainer.setChunkSupplier(LightingChunk::new);
 
@@ -29,8 +35,10 @@ public class Main {
             final Player player = event.getPlayer();
             event.setSpawningInstance(instanceContainer);
             player.setRespawnPoint(new Pos(0, 42, 0));
+            player.setGameMode(GameMode.CREATIVE);
         });
 
+        MotdHandler.enableMotd(globalEventHandler);
         minecraftServer.start("0.0.0.0", 25565);
     }
 }
