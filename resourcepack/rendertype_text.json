@@ -1,0 +1,11 @@
+{
+  "blend": { "func": "add", "srcfactor": "src_alpha", "dstfactor": "one_minus_src_alpha" },
+  "vertex": "minecraft:rendertype_text",
+  "fragment": "minecraft:rendertype_text",
+  "attributes": [ "Position", "Color", "UV0" ],
+  "uniforms": [
+    { "name": "ModelViewMat", "type": "matrix4x4", "count": 16, "values": [ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 ] },
+    { "name": "ProjectionMat", "type": "matrix4x4", "count": 16, "values": [ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 ] },
+    { "name": "ColorModulator", "type": "float4", "count": 4, "values": [ 1, 1, 1, 1 ] }
+  ]
+}
