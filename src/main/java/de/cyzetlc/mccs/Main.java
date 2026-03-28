@@ -1,6 +1,8 @@
 package de.cyzetlc.mccs;
 
 import de.cyzetlc.mccs.utils.motd.MotdHandler;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import net.minestom.server.Auth;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.coordinate.Pos;
@@ -8,6 +10,7 @@ import net.minestom.server.entity.GameMode;
 import net.minestom.server.entity.Player;
 import net.minestom.server.event.GlobalEventHandler;
 import net.minestom.server.event.player.AsyncPlayerConfigurationEvent;
+import net.minestom.server.event.player.PlayerChatEvent;
 import net.minestom.server.instance.InstanceContainer;
 import net.minestom.server.instance.InstanceManager;
 import net.minestom.server.instance.LightingChunk;
@@ -36,6 +39,13 @@ public class Main {
             event.setSpawningInstance(instanceContainer);
             player.setRespawnPoint(new Pos(0, 42, 0));
             player.setGameMode(GameMode.CREATIVE);
+        });
+
+        globalEventHandler.addListener(PlayerChatEvent.class, event -> {
+            TextColor uiTriggerColor = TextColor.color(254, 254, 254);
+            String minimapIcon = "\uE001";
+
+            event.getPlayer().sendActionBar(Component.text(minimapIcon).color(uiTriggerColor));
         });
 
         MotdHandler.enableMotd(globalEventHandler);
