@@ -27,6 +27,8 @@ dependencies {
 
     implementation("net.minestom:minestom:2026.03.25-1.21.11")
     implementation("org.slf4j:slf4j-simple:2.0.14")
+
+    implementation("de.articdive:jnoise-pipeline:4.1.0")
 }
 
 tasks.test {
