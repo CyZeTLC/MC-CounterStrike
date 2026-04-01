@@ -1,7 +1,5 @@
 package de.cyzetlc.mccs;
 
-import de.articdive.jnoise.generators.noisegen.opensimplex.FastSimplexNoiseGenerator;
-import de.articdive.jnoise.pipeline.JNoise;
 import de.cyzetlc.mccs.utils.generator.WorldGenerator;
 import de.cyzetlc.mccs.utils.motd.MotdHandler;
 import net.kyori.adventure.text.Component;
@@ -11,7 +9,6 @@ import net.minestom.server.Auth;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.advancements.FrameType;
 import net.minestom.server.advancements.Notification;
-import net.minestom.server.coordinate.Point;
 import net.minestom.server.coordinate.Pos;
 import net.minestom.server.entity.GameMode;
 import net.minestom.server.entity.ItemEntity;
@@ -23,7 +20,6 @@ import net.minestom.server.event.player.PlayerChatEvent;
 import net.minestom.server.instance.InstanceContainer;
 import net.minestom.server.instance.InstanceManager;
 import net.minestom.server.instance.LightingChunk;
-import net.minestom.server.instance.block.Block;
 import net.minestom.server.item.ItemStack;
 import net.minestom.server.item.Material;
 
