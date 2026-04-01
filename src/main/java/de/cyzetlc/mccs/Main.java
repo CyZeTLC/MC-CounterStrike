@@ -1,17 +1,14 @@
 package de.cyzetlc.mccs;
 
 import de.cyzetlc.mccs.listener.PlayerBlockBreakListener;
+import de.cyzetlc.mccs.listener.PlayerConfigurationListener;
 import de.cyzetlc.mccs.utils.generator.WorldGenerator;
 import de.cyzetlc.mccs.utils.motd.MotdHandler;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.minestom.server.Auth;
 import net.minestom.server.MinecraftServer;
-import net.minestom.server.coordinate.Pos;
-import net.minestom.server.entity.GameMode;
-import net.minestom.server.entity.Player;
 import net.minestom.server.event.GlobalEventHandler;
-import net.minestom.server.event.player.AsyncPlayerConfigurationEvent;
 import net.minestom.server.event.player.PlayerChatEvent;
 import net.minestom.server.instance.InstanceContainer;
 import net.minestom.server.instance.InstanceManager;
@@ -29,12 +26,7 @@ public class Main {
         instanceContainer.setChunkSupplier(LightingChunk::new);
 
         GlobalEventHandler globalEventHandler = MinecraftServer.getGlobalEventHandler();
-        globalEventHandler.addListener(AsyncPlayerConfigurationEvent.class, event -> {
-            final Player player = event.getPlayer();
-            event.setSpawningInstance(instanceContainer);
-            player.setRespawnPoint(new Pos(0, 42, 0));
-            player.setGameMode(GameMode.CREATIVE);
-        });
+        globalEventHandler.addListener(new PlayerConfigurationListener(instanceContainer));
 
         globalEventHandler.addListener(new PlayerBlockBreakListener());
 
