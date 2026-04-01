@@ -1,27 +1,21 @@
 package de.cyzetlc.mccs;
 
+import de.cyzetlc.mccs.listener.PlayerBlockBreakListener;
 import de.cyzetlc.mccs.utils.generator.WorldGenerator;
 import de.cyzetlc.mccs.utils.motd.MotdHandler;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.minestom.server.Auth;
 import net.minestom.server.MinecraftServer;
-import net.minestom.server.advancements.FrameType;
-import net.minestom.server.advancements.Notification;
 import net.minestom.server.coordinate.Pos;
 import net.minestom.server.entity.GameMode;
-import net.minestom.server.entity.ItemEntity;
 import net.minestom.server.entity.Player;
 import net.minestom.server.event.GlobalEventHandler;
 import net.minestom.server.event.player.AsyncPlayerConfigurationEvent;
-import net.minestom.server.event.player.PlayerBlockBreakEvent;
 import net.minestom.server.event.player.PlayerChatEvent;
 import net.minestom.server.instance.InstanceContainer;
 import net.minestom.server.instance.InstanceManager;
 import net.minestom.server.instance.LightingChunk;
-import net.minestom.server.item.ItemStack;
-import net.minestom.server.item.Material;
 
 public class Main {
     static void main(String[] args) {
@@ -42,22 +36,7 @@ public class Main {
             player.setGameMode(GameMode.CREATIVE);
         });
 
-        globalEventHandler.addListener(PlayerBlockBreakEvent.class, event -> {
-            Notification notification = new Notification(
-                    Component.text("Hello, Notifications!", NamedTextColor.GREEN),
-                    FrameType.GOAL,
-                    ItemStack.of(Material.GOLD_INGOT)
-            );
-
-            event.getPlayer().sendNotification(notification);
-
-            Material material = event.getBlock().registry().material();
-
-            if (material != null && material != Material.AIR) {
-                ItemEntity entity = new ItemEntity(ItemStack.of(material));
-                entity.setInstance(event.getInstance(), event.getBlockPosition().add(0.5, 0.5, 0.5));
-            }
-        });
+        globalEventHandler.addListener(new PlayerBlockBreakListener());
 
         globalEventHandler.addListener(PlayerChatEvent.class, event -> {
             TextColor uiTriggerColor = TextColor.color(254, 254, 254);
