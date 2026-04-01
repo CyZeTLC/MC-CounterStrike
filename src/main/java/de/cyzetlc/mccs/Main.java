@@ -25,8 +25,6 @@ import net.minestom.server.item.Material;
 
 public class Main {
     static void main(String[] args) {
-        System.out.println("Hello world!");
-
         MinecraftServer minecraftServer = MinecraftServer.init(new Auth.Online());
 
         InstanceManager instanceManager = MinecraftServer.getInstanceManager();
