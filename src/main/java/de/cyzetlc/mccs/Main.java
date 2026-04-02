@@ -15,7 +15,7 @@ import net.minestom.server.instance.InstanceManager;
 import net.minestom.server.instance.LightingChunk;
 
 public class Main {
-    static void main(String[] args) {
+    static void main() {
         MinecraftServer minecraftServer = MinecraftServer.init(new Auth.Online());
 
         InstanceManager instanceManager = MinecraftServer.getInstanceManager();
